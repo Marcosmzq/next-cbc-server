@@ -25,7 +25,7 @@ export class UsersService {
       username,
       email,
       password: hashPassword,
-      role: Role.Admin,
+      role: Role.User,
     });
     const saveUser = await this.userRepository.save(newUser);
     const token = generateToken(saveUser);
