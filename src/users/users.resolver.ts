@@ -10,7 +10,6 @@ export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
   @Mutation(() => String, { name: 'createUser' })
-  @Roles(Role.Admin)
   createUser(
     @Args('createUserInput')
     createUserInput: CreateUserInput,
@@ -19,11 +18,13 @@ export class UsersResolver {
   }
 
   @Query(() => [User], { name: 'findAllUsers' })
+  @Roles(Role.Admin)
   findAll() {
     return this.usersService.findAll();
   }
 
   @Query(() => User, { name: 'findUserById' })
+  @Roles(Role.Admin)
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.usersService.findOne(id);
   }
